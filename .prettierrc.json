@@ -1,0 +1,4 @@
+{
+  "singleQuote": true,
+  "importOrder": ["^aws-cdk-lib(.*)$", "<THIRD_PARTY_MODULES>", "^[./]"]
+}
