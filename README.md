@@ -1,14 +1,29 @@
-# Welcome to your CDK TypeScript project!
+## Stack
 
-This is a blank project for TypeScript development with CDK.
+- An _Identity Pool_ with "Allow unauthenticated identities"
+- An _Unauthenticated_ role, to be assumed by unauthenticated identities.
+- A `LambdaRestAPI` with a single `ANY` method on root authorized by IAM.
+- A _Policy_ that allows _Unauthenticated_ to execute that single endpoint.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Tooling
+- CDK:
+  - [AWS CDK v2](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+- Client
+  - [AWS SDK for JavaScript v3](https://github.com/aws/aws-sdk-js-v3):
+    - `GetIdCommand`
+    - `GetCredentialsForIdentityCommand`
+  - [Axios](https://github.com/axios/axios) and [aws4](https://github.com/mhart/aws4)
 
-## Useful commands
+## Setup
 
-- `npm run build` compile typescript to js
-- `npm run watch` watch for changes and compile
-- `npm run test` perform the jest unit tests
-- `cdk deploy` deploy this stack to your default AWS account/region
-- `cdk diff` compare deployed stack with current state
-- `cdk synth` emits the synthesized CloudFormation template
+```sh
+npm install
+cdk bootstrap
+npm run deploy
+npm run client
+```
+
+### Notes
+
+- `npm run deploy` instead of `cdk deploy` to run the `"postdeploy"` script. This will read the outputs and write them into the _.env_ file.
+- The **client** is a demo on how to retrieve the identity and credentials to call the API.
