@@ -3,7 +3,6 @@ import {
   GetIdCommand,
   GetCredentialsForIdentityCommand,
 } from '@aws-sdk/client-cognito-identity';
-import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
 import * as aws4 from 'aws4';
 import axios, { AxiosRequestConfig } from 'axios';
 import { config } from 'dotenv';
@@ -14,12 +13,7 @@ config();
 const IDENTITY_POOL_ID = process.env.IDENTITY_POOL_ID as string;
 const ENDPOINT = process.env.ENDPOINT as string;
 
-const client = new CognitoIdentityClient({
-  credentials: fromCognitoIdentityPool({
-    client: new CognitoIdentityClient({}),
-    identityPoolId: IDENTITY_POOL_ID,
-  }),
-});
+const client = new CognitoIdentityClient({});
 
 const getMessage = async () => {
   try {
